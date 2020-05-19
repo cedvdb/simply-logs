@@ -1,7 +1,7 @@
 {
   "name": "simple-log",
-  "version": "1.0.0",
-  "description": "simplest logger that works on the browser and node",
+  "version": "0.0.1",
+  "description": "A dead simple cross platform logger",
   "main": "index.js",
   "scripts": {
     "test": "tsc -p tsconfig.spec.json && jasmine"
