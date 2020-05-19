@@ -8,6 +8,7 @@ It just does one thing: lets you set a log level and then log if it's appropriat
 # Features
 
  - Simple
+ - Can set log level to disable some outputs
  - You can transform output to suit your needs
 
 # Usage
