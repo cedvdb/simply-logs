@@ -6,7 +6,7 @@ describe('log', () => {
   const log = new Log();
   const message = 'Hello World!';
   const expected = 'Hello World!';
-  log.transformFn = (level, str) => str + level; 
+  log.transformFn = (level, str) => [str + level]; 
 
 
   it('should call error with the transformed string', () => {
@@ -35,6 +35,13 @@ describe('log', () => {
     log.debug(message);
     expect(console.debug)
       .toHaveBeenCalledWith(expected + LogLevel.DEBUG);
+  });
+
+  it('should call trace with the transformed string', () => {
+    spyOn(console, 'trace');
+    log.trace(message);
+    expect(console.trace)
+      .toHaveBeenCalledWith(expected + LogLevel.TRACE);
   });
 
 
