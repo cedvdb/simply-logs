@@ -88,12 +88,5 @@ describe('log', () => {
       .toHaveBeenCalledWith(expected + LogLevel.TRACE);
   });
 
-  it('should call group with the transformed string', () => {
-    spyOn(console, 'groupCollapsed');
-    log.group(LogLevel.DEBUG, message);
-    expect(console.groupCollapsed)
-      .toHaveBeenCalledWith(expected + LogLevel.TRACE);
-  });
-
 
 });
