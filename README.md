@@ -13,7 +13,7 @@ It just does one thing: lets you set a log level and then log if it's appropriat
 # Usage
 
 ```javascript
-  import { log, LogLevel } from 'simple-log';
+  import { log, LogLevel } from 'simply-logs';
 
   // same methods as on the console:
   log.setLogLevel(LogLevel.ALL);
@@ -43,7 +43,7 @@ example:
 
 ```javascript
 
-import { TransformFn } from 'simple-log';
+import { TransformFn } from 'simply-logs';
 
 const pretty: TransformFn = 
   (level: RuntimeLogLevel, ...args: any[]) => [
@@ -60,7 +60,7 @@ log.warn('hey'); // [WARN] hey [now]
 there is two prebuilt transform which have coloring (no dependencies).
 
 ```
-import { log, prettyNode, prettyBrowser } from 'simple-log';
+import { log, prettyNode, prettyBrowser } from 'simply-logs';
 
 log.transformFn = prettyBrowser;
 // or log.transformFn = prettyNode;
