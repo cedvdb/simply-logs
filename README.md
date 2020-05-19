@@ -10,6 +10,7 @@ It just does one thing: lets you set a log level and then log if it's appropriat
  - Simple
  - Can set log level to disable some outputs
  - You can transform output to suit your needs
+ - Typed
 
 # Usage
 
@@ -46,8 +47,8 @@ example:
 
 import { TransformFn } from 'simply-logs';
 
-const pretty: TransformFn = 
-  (level: RuntimeLogLevel, ...args: any[]) => [
+const pretty = 
+  (level, ...args) => [
     `[${level}] ${args.join(' ')} [${(new Date()).toLocaleTimeString()}]`, 
   ];
 
@@ -60,7 +61,7 @@ log.warn('hey'); // [WARN] hey [now]
 
 there is two prebuilt transform which have coloring (no dependencies).
 
-```
+```javascript
 import { log, prettyNode, prettyBrowser } from 'simply-logs';
 
 log.transformFn = prettyBrowser;
