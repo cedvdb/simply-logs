@@ -9,6 +9,11 @@ export enum LogLevel {
   ALL = 'ALL'
 }
 
+// above log level without off and all
+export type RuntimeLogLevel = Exclude<
+  Exclude<LogLevel, LogLevel.OFF>, 
+LogLevel.ALL>;
+
 export const levelValue = {
   [LogLevel.OFF]: 0,
   [LogLevel.ERROR]: 1,

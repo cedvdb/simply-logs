@@ -8,6 +8,50 @@ describe('log', () => {
   const expected = 'Hello World!';
   log.transformFn = (level, str) => [str + level]; 
 
+  beforeEach(() => {
+    log.setLogLevel(LogLevel.ALL);
+  });
+
+  it('should not call anything when a level above', () => {
+    spyOnAllFunctions(console);
+
+    log.setLogLevel(LogLevel.OFF);
+    log.error(message);
+    expect(console.error).not.toHaveBeenCalled();
+
+    log.setLogLevel(LogLevel.ERROR);
+    log.warn(message);
+    expect(console.warn).not.toHaveBeenCalled();
+
+    log.setLogLevel(LogLevel.WARN);
+    log.info(message);
+    expect(console.info).not.toHaveBeenCalled();
+
+    log.setLogLevel(LogLevel.INFO);
+    log.debug(message);
+    expect(console.debug).not.toHaveBeenCalled();
+
+    log.setLogLevel(LogLevel.DEBUG);
+    log.trace(message);
+    expect(console.trace).not.toHaveBeenCalled();
+
+    log.setLogLevel(LogLevel.INFO);
+
+    log.count(LogLevel.DEBUG);
+    expect(console.count).not.toHaveBeenCalled();
+    log.dir(LogLevel.DEBUG);
+    expect(console.dir).not.toHaveBeenCalled();
+    log.group(LogLevel.DEBUG);
+    expect(console.group).not.toHaveBeenCalled();
+    log.groupEnd(LogLevel.DEBUG);
+    expect(console.groupEnd).not.toHaveBeenCalled();
+    log.table(LogLevel.DEBUG);
+    expect(console.table).not.toHaveBeenCalled();
+    log.time(LogLevel.DEBUG);
+    expect(console.time).not.toHaveBeenCalled();
+    log.timeEnd(LogLevel.DEBUG);
+    expect(console.timeEnd).not.toHaveBeenCalled();
+  });
 
   it('should call error with the transformed string', () => {
     spyOn(console, 'error');
@@ -41,6 +85,13 @@ describe('log', () => {
     spyOn(console, 'trace');
     log.trace(message);
     expect(console.trace)
+      .toHaveBeenCalledWith(expected + LogLevel.TRACE);
+  });
+
+  it('should call group with the transformed string', () => {
+    spyOn(console, 'groupCollapsed');
+    log.group(LogLevel.DEBUG, message);
+    expect(console.groupCollapsed)
       .toHaveBeenCalledWith(expected + LogLevel.TRACE);
   });
 

@@ -1,4 +1,4 @@
-import { LogLevel } from '../log-level';
+import { RuntimeLogLevel } from '../log-level';
 
 
-export type TransformFn = (level: LogLevel, ...args: any[]) => any[];
+export type TransformFn = (level: RuntimeLogLevel, ...args: any[]) => any[];

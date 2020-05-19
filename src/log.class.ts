@@ -1,4 +1,4 @@
-import { LogLevel, levelValue } from './log-level';
+import { LogLevel, levelValue, RuntimeLogLevel } from './log-level';
 import { TransformFn } from './transform/transform.interface';
 
 export class Log {
@@ -6,13 +6,13 @@ export class Log {
   private level: number = levelValue[LogLevel.ALL];
 
   /** function to transform the input of each log before printing */
-  transformFn: TransformFn = (level: LogLevel, ...args: any[]) => args;
+  transformFn: TransformFn = (level: RuntimeLogLevel, ...args: any[]) => args;
 
   /**
    * Sets the log level for the logger
-   * @param level LogLevel:
-   * OFF: 0, ERROR: 1, WARN: 2, INFO: 3,
-   * DEBUG: 4, TRACE: 5, ALL: 10
+   * @param level LogLevel: one of
+   * OFF, ERROR, WARN, INFO,
+   * DEBUG, TRACE, ALL
    */
   setLogLevel(level: LogLevel) {
     this.level = levelValue[level];
@@ -54,46 +54,46 @@ export class Log {
   }
 
   /** (Browser) group logs together */
-	group(level: LogLevel, ...args: any[]) {
-		if (this.level >= levelValue[level])
-			console.groupCollapsed(...args);
+	group(level: RuntimeLogLevel, ...args: any[]) {
+		if (this.level >= levelValue[level] && levelValue[level])
+			console.groupCollapsed(...this.transformFn(LogLevel.TRACE, ...args));
 	}
 
   /** (Browser) collapse group */
-	groupEnd(level: LogLevel) {
-    if (this.level >= levelValue[level])
+	groupEnd(level: RuntimeLogLevel) {
+    if (this.level >= levelValue[level] && levelValue[level])
 		  console.groupEnd();
 	}
 
 	/** displays a nicely formated table */
-	table(level: LogLevel, ...args: any[]) {
-		if (this.level >= levelValue[level])
+	table(level: RuntimeLogLevel, ...args: any[]) {
+		if (this.level >= levelValue[level] && levelValue[level])
 			console.table(...args);
 	}
 
 	/** counts the number of times we go through this count */
-	count(level: LogLevel, label: string) {
-		if (this.level >= levelValue[level])
+	count(level: RuntimeLogLevel, label?: string) {
+		if (this.level >= levelValue[level] && levelValue[level])
 			console.count(label);
   }
   
   /** starts timer */
-  time(level: LogLevel, label: string) {
-		if (this.level >= levelValue[level])
+  time(level: RuntimeLogLevel, label?: string) {
+		if (this.level >= levelValue[level] && levelValue[level])
 			console.time(label);
   }
 
   /** ends timer */
-  timeEnd(level: LogLevel, label: string) {
+  timeEnd(level: RuntimeLogLevel, label?: string) {
 		if (this.level >= levelValue[level])
 			console.timeEnd(label);
   }
 
   /** (Browser) displays an interactive list of 
    * properties of the specified JavaScript object */
-  dir(level: LogLevel, ...args: any[]) {
+  dir(level: RuntimeLogLevel, ...args: any[]) {
 		if (this.level >= levelValue[level])
-			console.dir(args);
+			console.dir(...this.transformFn(LogLevel.TRACE, ...args));
   }
 
 }
