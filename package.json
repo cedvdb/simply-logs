@@ -1,0 +1,14 @@
+{
+  "name": "simple-log",
+  "version": "1.0.0",
+  "description": "simplest logger that works on the browser and node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/jasmine": "^3.5.10"
+  }
+}
