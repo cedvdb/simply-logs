@@ -4,7 +4,7 @@
   "description": "simplest logger that works on the browser and node",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "tsc -p tsconfig.spec.json && jasmine"
   },
   "author": "",
   "license": "ISC",
