@@ -1,6 +1,7 @@
 import { LogLevel, levelValue, RuntimeLogLevel } from './log-level';
 import { TransformFn } from './transform/transform.interface';
 
+
 export class Log {
 
   private level: number = levelValue[LogLevel.ALL];
