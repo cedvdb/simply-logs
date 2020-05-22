@@ -5,8 +5,8 @@
   "main": "dist/index.js",
   "types":"dist/index.d.ts",
   "scripts": {
-    "prepublish": "tsc",
-    "test": "tsc -p tsconfig.spec.json && jasmine"
+    "prepublish": "rm -rf dist && tsc",
+    "test": "rm -rf spec/dist && tsc -p tsconfig.spec.json && jasmine"
   },
   "author": "Cedric Vanden Bosch",
   "license": "ISC",
