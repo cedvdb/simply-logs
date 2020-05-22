@@ -11,9 +11,10 @@ export const browserColors = {
 }
 
 export const prettyBrowser: TransformFn = 
-  (level: RuntimeLogLevel, ...args: any[]) => [
-    `%c[${level}] %c${args.join(' ')} %c[${(new Date()).toLocaleTimeString()}]`, 
+  (level: RuntimeLogLevel, str: string, ...args: any[]) => [
+    `%c[${level}] %c${str} %c[${(new Date()).toLocaleTimeString()}]`, 
     `color: ${ browserColors[level] }`, 
+    ...args,
     'color: grey',  
     'color: #ccc'
   ];
