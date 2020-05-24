@@ -49,15 +49,16 @@ export class Log {
   }
 
   /** prints stack trace */
-  trace(...args: any[]) {
-    if (this.level >= levelValue[LogLevel.TRACE])
-      console.trace(...this.transformFn(LogLevel.TRACE, ...args));   
+  trace(level: RuntimeLogLevel, ...args: any[]) {
+    // && levelValue[level] for js, ts will complain with LogLevel.OFF
+    if (this.level >= levelValue[level] && levelValue[level])
+      console.trace(...this.transformFn(level, ...args));   
   }
 
   /** (Browser) group logs together */
 	group(level: RuntimeLogLevel, ...args: any[]) {
 		if (this.level >= levelValue[level] && levelValue[level])
-			console.groupCollapsed(...this.transformFn(LogLevel.TRACE, ...args));
+			console.groupCollapsed(...this.transformFn(level, ...args));
 	}
 
   /** (Browser) collapse group */
@@ -86,15 +87,15 @@ export class Log {
 
   /** ends timer */
   timeEnd(level: RuntimeLogLevel, label?: string) {
-		if (this.level >= levelValue[level])
+		if (this.level >= levelValue[level] && levelValue[level])
 			console.timeEnd(label);
   }
 
   /** (Browser) displays an interactive list of 
    * properties of the specified JavaScript object */
   dir(level: RuntimeLogLevel, ...args: any[]) {
-		if (this.level >= levelValue[level])
-			console.dir(...this.transformFn(LogLevel.TRACE, ...args));
+		if (this.level >= levelValue[level] && levelValue[level])
+			console.dir(...this.transformFn(level, ...args));
   }
 
 }

@@ -7,7 +7,6 @@ export const browserColors = {
   [LogLevel.WARN]: 'gold',
   [LogLevel.INFO]: 'green',
   [LogLevel.DEBUG]: 'blue',
-  [LogLevel.TRACE]: 'purple',
 }
 
 export const prettyBrowser: TransformFn = 
@@ -24,7 +23,6 @@ export const nodeColors = {
   [LogLevel.WARN]: '\x1b[33m',
   [LogLevel.INFO]: '\x1b[32m',
   [LogLevel.DEBUG]: '\x1b[34m',
-  [LogLevel.TRACE]: '\x1b[0;35m',
 }
 
 export const prettyNode: TransformFn = 

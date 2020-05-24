@@ -31,12 +31,12 @@ describe('log', () => {
     log.debug(message);
     expect(console.debug).not.toHaveBeenCalled();
 
-    log.setLogLevel(LogLevel.DEBUG);
-    log.trace(message);
-    expect(console.trace).not.toHaveBeenCalled();
+
 
     log.setLogLevel(LogLevel.INFO);
 
+    log.trace(LogLevel.DEBUG, message);
+    expect(console.trace).not.toHaveBeenCalled();
     log.count(LogLevel.DEBUG);
     expect(console.count).not.toHaveBeenCalled();
     log.dir(LogLevel.DEBUG);
@@ -83,9 +83,9 @@ describe('log', () => {
 
   it('should call trace with the transformed string', () => {
     spyOn(console, 'trace');
-    log.trace(message);
+    log.trace(LogLevel.DEBUG, message);
     expect(console.trace)
-      .toHaveBeenCalledWith(expected + LogLevel.TRACE);
+      .toHaveBeenCalledWith(expected + LogLevel.DEBUG);
   });
 
 
