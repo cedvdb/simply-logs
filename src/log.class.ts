@@ -38,8 +38,9 @@ export class Log {
   }
 
   /** prints info log, alias for Log.info */
-  log(...args: any[]) {
-    this.info(...args);
+  log(level: LogLevel, ...args: any[]) {
+    if (this.level >= levelValue[level] && levelValue[level])
+      console.log(...args);
   }
   
   /** prints debug log */
