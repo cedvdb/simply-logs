@@ -10,10 +10,19 @@ export const browserColors = {
 }
 
 export const prettyBrowser: TransformFn = 
-  (level: RuntimeLogLevel, ...args: any[]) => [
-    `%c${(new Date()).toLocaleTimeString()} %c[${level}]`, 
+  (level: RuntimeLogLevel, str: string, ...args: any[]) => [
+    `%c[${level}] %c${str}`, 
+    `color: ${ browserColors[level] }`,
+    'color: grey',
+    ...args
+  ];
+
+export const prettyBrowserTime: TransformFn = 
+  (level: RuntimeLogLevel, str: string, ...args: any[]) => [
+    `%c${(new Date()).toLocaleTimeString()} %c[${level}] %c${str}`, 
     'color: #ccc',
     `color: ${ browserColors[level] }`,
+    'color: grey',
     ...args
   ];
 
@@ -25,6 +34,11 @@ export const nodeColors = {
 }
 
 export const prettyNode: TransformFn = 
+  (level: RuntimeLogLevel, ...args: any[]) => [
+    `${nodeColors[level]}[${level}] \x1b[37m${args.join(' ')}\x1b[0m`
+  ];
+
+export const prettyNodeTime: TransformFn = 
   (level: RuntimeLogLevel, ...args: any[]) => [
     `${nodeColors[level]}[${level}] \x1b[37m${args.join(' ')} \x1b[90m[${(new Date()).toLocaleTimeString()}]\x1b[0m`
   ];
