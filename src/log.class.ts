@@ -37,7 +37,7 @@ export class Log {
       console.info(...this.transformFn(LogLevel.INFO, ...args));   
   }
 
-  /** prints info log, alias for Log.info */
+  /** like console.log with a level */
   log(level: LogLevel, ...args: any[]) {
     if (this.level >= levelValue[level] && levelValue[level])
       console.log(...args);
