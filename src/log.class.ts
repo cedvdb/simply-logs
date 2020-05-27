@@ -96,7 +96,7 @@ export class Log {
    * properties of the specified JavaScript object */
   dir(level: RuntimeLogLevel, ...args: any[]) {
 		if (this.level >= levelValue[level] && levelValue[level])
-			console.dir(...args);
+			console.log(...this.transformFn(level), ...args);
   }
 
 }
