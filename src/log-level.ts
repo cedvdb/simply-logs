@@ -13,7 +13,7 @@ export type RuntimeLogLevel = Exclude<
   Exclude<LogLevel, LogLevel.OFF>, 
 LogLevel.ALL>;
 
-export const levelValue = {
+export const levelValueMap = {
   [LogLevel.OFF]: 0,
   [LogLevel.ERROR]: 1,
   [LogLevel.WARN]: 2,
